@@ -1,0 +1,88 @@
+/* main settings */
+:root {
+	--configPullerSize: 20px;
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+
+main {
+	font-size: 30px;
+}
+
+h3 {
+	font-size: 1em;
+}
+
+p {
+	font-size: 1em;
+}
+
+/* flitsen part */
+#flitsSectie .showFlits {
+	width: 75%;
+	height: 90vh;
+}
+#flitsSectie .showFlits img {
+	width: 100%;
+	height: auto;
+	max-height: 90vh;
+}
+
+/* info part */
+.mainGrid {
+	width: 66%;
+	height: 100vh;
+	display: grid;
+	grid-template: repeat(10, 1fr) / repeat(10, 1fr);
+	align-items: center;
+	justify-items: center;
+}
+.mainGrid img {
+	max-width: 100%;
+	height: auto;
+	max-height: 50vh;
+	z-index: 1;
+}
+
+/* config part */
+#config {
+	position: fixed;
+	border: 2px solid black;
+	border-radius: 10px;
+	left: 66%;
+	top: 40vh;
+	width: 35%;
+	height: 55vh;
+	transition: left 2s;
+	z-index: 5;
+}
+
+#configPull {
+	position: relative;
+	left: -50px;
+	top: 0;
+	height: 50px;
+	width: 50px;
+	display: inline;
+}
+.tabs {
+	display: inline-flex;
+	justify-content: space-around;
+	width: 80%;
+}
+
+#config .containerBloemnaam {
+	display: flex;
+}
+#config .containerBloemnaam img {
+	height: 1.5rem;
+	width: 1.5rem;
+	visibility: hidden;
+}
+
+/* too small screens */
+/* img {
+	width: inherit;
+} */
