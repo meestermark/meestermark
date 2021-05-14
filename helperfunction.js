@@ -111,20 +111,48 @@ function getFlitsAfbeelding(chanceTussendoortje, chosenFlowers) {
 
 let flitsFlowers = async function (chosenFlowers) {
 	let chanceTussendoortje = 0.0;
-	let flitsDiv = create_element('div', ['showFlits']);
-	flitsSectie.insertBefore(flitsDiv, flitsSectie.firstChild);
+	let showFlits = document.getElementById('showFlits');
 	console.log('inside flitsFlowers');
 	while (flitsende) {
 		console.log('still flitsend');
-		flitsDiv.innerHTML = '';
-		let newAfbeelding = getFlitsAfbeelding(chanceTussendoortje, chosenFlowers);
-		flitsDiv.appendChild(newAfbeelding);
+		if (!paused) {
+			showFlits.innerHTML = '';
+			let newAfbeelding = getFlitsAfbeelding(
+				chanceTussendoortje,
+				chosenFlowers
+			);
+			showFlits.appendChild(newAfbeelding);
+		}
 		await showFlower();
 	}
 };
 let startFlitsen = function () {
 	weergaveSectie.innerHTML = '';
+	flitsSectie.innerHTML = '';
+
+	let showFlits = create_element('div', [], 'showFlits');
+
+	let stopBtn = create_element('button', [], '', {}, 'stop.');
+	stopBtn.onclick = () => {
+		flitsende = false;
+	};
+	let pauseBtn = create_element('button', [], '', {}, 'pauzeer.');
+	pauseBtn.onclick = () => {
+		paused ? (paused = false) : (paused = true);
+	};
+
+	flitsSectie.appendChild(showFlits);
+	flitsSectie.appendChild(pauseBtn);
+	flitsSectie.appendChild(stopBtn);
+
 	flitsende = true;
+	paused = false;
+
 	let chosenFlowers = getChosenFlowers();
 	flitsFlowers(chosenFlowers);
+};
+
+let stopFlitsen = function () {
+	flitsende = false;
+	console.log('flitsen is gestopt.');
 };

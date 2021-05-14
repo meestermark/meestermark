@@ -13,24 +13,32 @@ configPull.onclick = function () {
 	}
 };
 
-let configInhoud = create_element('div', ['containerConfig']);
-configSectie.appendChild(configInhoud);
+function toggle(elements = [], aspect = [], values = []) {
+	// takes two elements with the aspect that's toggled and two values that they toggle with, both provided in a list.
+	if (elements[0][aspect[0]][aspect[1]] == values[0]) {
+		elements[0][aspect[0]][aspect[1]] = values[1];
+		elements[1][aspect[0]][aspect[1]] = values[0];
+	} else {
+		elements[0][aspect[0]][aspect[1]] = values[0];
+		elements[1][aspect[0]][aspect[1]] = values[1];
+	}
+}
 
-function createFlitsSectie() {
-	infoConfigSectie.style.opacity = '0.6';
-	flitsConfigSectie.style.opacity = '1';
-	infoConfigSectie.style.fontWeight = 'normal';
-	flitsConfigSectie.style.fontWeight = 'bold';
-	configInhoud.innerHTML = '';
-	let ConfigHeader = create_element(
-		'h3',
-		'',
-		'',
-		{},
-		'kies de bloemen waar je mee wilt flitsen.'
+function clearConfigSectie() {
+	toggle(
+		[infoConfigSectie, flitsConfigSectie],
+		['style', 'opacity'],
+		['0.6', '1']
 	);
-	configInhoud.appendChild(ConfigHeader);
+	toggle(
+		[infoConfigSectie, flitsConfigSectie],
+		['style', 'fontWeight'],
+		['normal', 'bold']
+	);
+	configInhoud.innerHTML = '';
+}
 
+function createBloemElementen(withVinkje = true) {
 	for (let bloemnaam of bloemen) {
 		let bloemelement = create_element(
 			'p',
@@ -39,15 +47,27 @@ function createFlitsSectie() {
 			{},
 			bloemnaam
 		);
-		let vinkje = create_element('img', [], '', {
-			src: './resources/vinkje.jpeg',
-		});
-		bloemelement.onclick = toggleVinkje;
-		let containerDiv = create_element('div', ['containerBloemnaam']);
-		containerDiv.appendChild(vinkje);
-		containerDiv.appendChild(bloemelement);
-		configInhoud.appendChild(containerDiv);
+		if (withVinkje) {
+			let vinkje = create_element('img', [], '', {
+				src: './resources/vinkje.jpeg',
+			});
+			bloemelement.onclick = toggleVinkje;
+			let containerDiv = create_element('div', ['bloemnaamContainer']);
+			containerDiv.appendChild(vinkje);
+			containerDiv.appendChild(bloemelement);
+			configInhoud.appendChild(containerDiv);
+		} else {
+			bloemelement.onclick = showBloemInfo;
+			configInhoud.appendChild(bloemelement);
+		}
 	}
+}
+function createFlitsSectie() {
+	clearConfigSectie();
+	weergaveSectie.innerHTML = '';
+	configHeader.innerText = 'kies de bloemen waar je mee wilt flitsen.';
+	createBloemElementen(true);
+
 	let flitsBtn = create_element('button', [], '', {}, 'begin met flitsen.');
 	flitsBtn.onclick = startFlitsen;
 	configInhoud.appendChild(flitsBtn);
@@ -55,36 +75,20 @@ function createFlitsSectie() {
 	stopBtn.onclick = () => {
 		flitsende = false;
 	};
-	flitsSectie.append(stopBtn);
+	let pauseBtn = create_element('button', [], '', {}, 'pauzeer.');
+	pauseBtn.onclick = () => {
+		paused ? (paused = false) : (paused = true);
+	};
+	flitsSectie.innerHTML = '';
+	flitsSectie.appendChild(pauseBtn);
+	flitsSectie.appendChild(stopBtn);
 }
 
 function createInfoSectie() {
-	infoConfigSectie.style.opacity = '1';
-	flitsConfigSectie.style.opacity = '0.6';
-	infoConfigSectie.style.fontWeight = 'bold';
-	flitsConfigSectie.style.fontWeight = 'normal';
-	configInhoud.innerHTML = '';
-
-	let ConfigHeader = create_element(
-		'h3',
-		'',
-		'',
-		{},
-		'kies de bloem waar je over wilt vertellen.'
-	);
-	configInhoud.appendChild(ConfigHeader);
-
-	for (let bloemnaam of bloemen) {
-		let bloemelement = create_element(
-			'p',
-			[bloemnaam, 'choice'],
-			'',
-			{ value: 'false' },
-			bloemnaam
-		);
-		bloemelement.onclick = showBloemInfo;
-		configInhoud.appendChild(bloemelement);
-	}
+	clearConfigSectie();
+	flitsSectie.innerHTML = '';
+	configHeader.innerText = 'kies de bloemen waar je mee wilt flitsen.';
+	createBloemElementen(false);
 }
 infoConfigSectie.onclick = createInfoSectie;
 flitsConfigSectie.onclick = createFlitsSectie;

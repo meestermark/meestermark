@@ -20,11 +20,11 @@ p {
 }
 
 /* flitsen part */
-#flitsSectie .showFlits {
+#showFlits {
 	width: 75%;
 	height: 90vh;
 }
-#flitsSectie .showFlits img {
+#showFlits img {
 	width: 100%;
 	height: auto;
 	max-height: 90vh;
@@ -61,10 +61,10 @@ p {
 
 #configPull {
 	position: relative;
-	left: -50px;
+	left: -3rem;
 	top: 0;
-	height: 50px;
-	width: 50px;
+	height: 3rem;
+	width: 3rem;
 	display: inline;
 }
 .tabs {
@@ -73,10 +73,10 @@ p {
 	width: 80%;
 }
 
-#config .containerBloemnaam {
+#config .bloemnaamContainer {
 	display: flex;
 }
-#config .containerBloemnaam img {
+#config .bloemnaamContainer img {
 	height: 1.5rem;
 	width: 1.5rem;
 	visibility: hidden;
