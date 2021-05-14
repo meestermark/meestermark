@@ -84,11 +84,18 @@ let getChosenFlowers = function () {
 	return chosenFlowers;
 };
 
-showFlower = function () {
+flowerShowTime = function () {
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
 			resolve();
 		}, 3000);
+	});
+};
+nameShowTime = function () {
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			resolve();
+		}, 1000);
 	});
 };
 function getFlitsAfbeelding(chanceTussendoortje, chosenFlowers) {
@@ -103,6 +110,7 @@ function getFlitsAfbeelding(chanceTussendoortje, chosenFlowers) {
 			'src',
 			`./resources/photos_big/${chosenFlower}${pictureNumber}.jpg`
 		);
+		picture.setAttribute('type', chosenFlower);
 		return picture;
 	} else {
 		return tussendoor[Math.floor(Math.random() * tussendoor.length)];
@@ -112,9 +120,7 @@ function getFlitsAfbeelding(chanceTussendoortje, chosenFlowers) {
 let flitsFlowers = async function (chosenFlowers) {
 	let chanceTussendoortje = 0.0;
 	let showFlits = document.getElementById('showFlits');
-	console.log('inside flitsFlowers');
 	while (flitsende) {
-		console.log('still flitsend');
 		if (!paused) {
 			showFlits.innerHTML = '';
 			let newAfbeelding = getFlitsAfbeelding(
@@ -122,8 +128,22 @@ let flitsFlowers = async function (chosenFlowers) {
 				chosenFlowers
 			);
 			showFlits.appendChild(newAfbeelding);
-		}
-		await showFlower();
+			await flowerShowTime();
+			let textContainer = create_element('div', ['textContainer']);
+			let text = create_element(
+				'p',
+				[],
+				'',
+				{},
+				newAfbeelding.getAttribute('type')
+			);
+			textContainer.appendChild(text);
+			if (flitsende) {
+				showFlits.appendChild(textContainer);
+
+				await nameShowTime();
+			}
+		} else await nameShowTime();
 	}
 };
 let startFlitsen = function () {
@@ -132,13 +152,40 @@ let startFlitsen = function () {
 
 	let showFlits = create_element('div', [], 'showFlits');
 
-	let stopBtn = create_element('button', [], '', {}, 'stop.');
+	let stopBtn = create_element(
+		'button',
+		['stop', 'unclicked'],
+		'',
+		{},
+		'stop.'
+	);
 	stopBtn.onclick = () => {
 		flitsende = false;
+		let pauseBtn = document.getElementsByClassName('pause')[0];
+		pauseBtn.classList.remove('clicked');
+		pauseBtn.innerText = 'pauze';
+
+		flitsSectie.innerHTML = '';
 	};
-	let pauseBtn = create_element('button', [], '', {}, 'pauzeer.');
-	pauseBtn.onclick = () => {
-		paused ? (paused = false) : (paused = true);
+	let pauseBtn = create_element(
+		'button',
+		['pause', 'unclicked'],
+		'',
+		{},
+		'pauze'
+	);
+	pauseBtn.onclick = (e) => {
+		if (paused) {
+			paused = false;
+			e.target.classList.remove('clicked');
+			e.target.classList.add('unclicked');
+			e.target.innerText = 'pauze';
+		} else {
+			paused = true;
+			e.target.classList.add('clicked');
+			e.target.classList.remove('unclicked');
+			e.target.innerText = 'gepauzeerd';
+		}
 	};
 
 	flitsSectie.appendChild(showFlits);
@@ -147,6 +194,9 @@ let startFlitsen = function () {
 
 	flitsende = true;
 	paused = false;
+
+	configPull.value = 'in';
+	configSectie.style.left = '99%';
 
 	let chosenFlowers = getChosenFlowers();
 	flitsFlowers(chosenFlowers);

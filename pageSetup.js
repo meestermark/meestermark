@@ -9,7 +9,7 @@ configPull.onclick = function () {
 		configSectie.style.left = '66%';
 	} else {
 		configPull.value = 'in';
-		configSectie.style.left = '33%';
+		configSectie.style.left = '99%';
 	}
 };
 
@@ -71,17 +71,7 @@ function createFlitsSectie() {
 	let flitsBtn = create_element('button', [], '', {}, 'begin met flitsen.');
 	flitsBtn.onclick = startFlitsen;
 	configInhoud.appendChild(flitsBtn);
-	let stopBtn = create_element('button', [], '', {}, 'stop.');
-	stopBtn.onclick = () => {
-		flitsende = false;
-	};
-	let pauseBtn = create_element('button', [], '', {}, 'pauzeer.');
-	pauseBtn.onclick = () => {
-		paused ? (paused = false) : (paused = true);
-	};
 	flitsSectie.innerHTML = '';
-	flitsSectie.appendChild(pauseBtn);
-	flitsSectie.appendChild(stopBtn);
 }
 
 function createInfoSectie() {
