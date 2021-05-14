@@ -79,6 +79,7 @@ function createInfoSectie() {
 	flitsSectie.innerHTML = '';
 	configHeader.innerText = 'kies de bloemen waar je mee wilt flitsen.';
 	createBloemElementen(false);
+	weergaveSectie.appendChild(tussendoor[0]);
 }
 infoConfigSectie.onclick = createInfoSectie;
 flitsConfigSectie.onclick = createFlitsSectie;

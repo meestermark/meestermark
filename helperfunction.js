@@ -36,6 +36,111 @@ function create_element(
 	}
 	return new_element;
 }
+let tussendoor = [
+	{
+		element: create_element('iframe', ['giphy-embed'], '', {
+			width: '100%',
+			height: '100%',
+			frameBorder: '0',
+			src: 'https://giphy.com/embed/mCQ68uXeecHjQvR6lj',
+		}),
+		text: 'handen omhoog',
+		type: 'giphy',
+	},
+	{
+		element: create_element('iframe', ['giphy-embed'], '', {
+			width: '100%',
+			height: '100%',
+			frameBorder: '0',
+			src: 'https://giphy.com/embed/xT9IgG50Fb7Mi0prBC',
+		}),
+		text: 'zwaaien',
+		type: 'giphy',
+	},
+	{
+		element: create_element('iframe', ['giphy-embed'], '', {
+			width: '100%',
+			height: '100%',
+			frameBorder: '0',
+			src: 'https://giphy.com/embed/YjF2enuCvcmDGoPiW9',
+		}),
+		text: 'rondje draaien',
+		type: 'giphy',
+	},
+	{
+		element: create_element('img', ['giphy-embed'], '', {
+			width: '100%',
+			height: '100%',
+			src: 'https://clipground.com/images/ground-up-clipart-14.jpg',
+		}),
+		text: 'iets oppakken van de grond',
+		type: 'giphy',
+	},
+	{
+		element: create_element('iframe', ['giphy-embed'], '', {
+			width: '100%',
+			height: '100%',
+			frameBorder: '0',
+			src: 'https://giphy.com/embed/3ohs7HfuuqL2gEhBHa',
+		}),
+		text: 'springen',
+		type: 'giphy',
+	},
+];
+/* {
+		element: create_element('iframe', ['giphy-embed'], '', {
+			width: '100%',
+			height: '100%',
+			frameBorder: '0',
+			src: 'https://giphy.com/embed/9xrpzU0L9rjJAkjP2n',
+		}),
+		text: 'staan en weer zitten',
+		type: 'giphy',
+	},
+
+	{
+		element: create_element('iframe', ['giphy-embed'], '', {
+			width: '100%',
+			height: '100%',
+			frameBorder: '0',
+			src: 'https://giphy.com/embed/KanqCs2oHuzKYCXSXo',
+		}),
+		text: 'schouders ophalen',
+		type: 'giphy',
+	},
+	{
+		element: create_element('iframe', ['giphy-embed'], '', {
+			width: '100%',
+			height: '100%',
+			frameBorder: '0',
+			src: 'https://giphy.com/embed/WscpZTKUM8EtkgwioW',
+		}),
+		text: 'gekke bek trekken',
+		type: 'giphy',
+	},
+
+	{
+		element: create_element('iframe', ['giphy-embed'], '', {
+			width: '100%',
+			height: '100%',
+			frameBorder: '0',
+			src: 'https://giphy.com/embed/kBZBlLVlfECvOQAVno',
+		}),
+		text: 'klappen',
+		type: 'giphy',
+	},
+	{
+		element: create_element('iframe', ['giphy-embed'], '', {
+			width: '100%',
+			height: '100%',
+			frameBorder: '0',
+			src: 'https://giphy.com/embed/XbxZ41fWLeRECPsGIJ',
+		}),
+		text: 'lach :D',
+		type: 'giphy',
+	},
+];
+ */
 toggleVinkje = function (e) {
 	let bloemetje = e.target;
 	bloemetje.style['font-weight'] = 'bold';
@@ -85,7 +190,7 @@ let getChosenFlowers = function () {
 };
 
 flowerShowTime = function () {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		setTimeout(() => {
 			resolve();
 		}, 3000);
@@ -98,52 +203,72 @@ nameShowTime = function () {
 		}, 1000);
 	});
 };
-function getFlitsAfbeelding(chanceTussendoortje, chosenFlowers) {
+function getFlitsAfbeelding(chanceTussendoortje, chosenFlowers, previous) {
+	//console.log('previous', previous, chanceTussendoortje);
+	if (previous.type !== 'afbeelding') {
+		chanceTussendoortje = 0.0;
+	}
 	let showPicture = Math.random() > chanceTussendoortje;
 	if (showPicture) {
 		let picture = document.createElement('img');
-
 		let chosenFlower =
 			chosenFlowers[Math.floor(Math.random() * chosenFlowers.length)];
 		let pictureNumber = Math.floor(Math.random() * 4) + 1;
+		while (
+			chosenFlower === previous.text &&
+			pictureNumber === previous.pictureNumber
+		) {
+			chosenFlower =
+				chosenFlowers[Math.floor(Math.random() * chosenFlowers.length)];
+			pictureNumber = Math.floor(Math.random() * 4) + 1;
+		}
 		picture.setAttribute(
 			'src',
 			`./resources/photos_big/${chosenFlower}${pictureNumber}.jpg`
 		);
 		picture.setAttribute('type', chosenFlower);
-		return picture;
+		return {
+			element: picture,
+			text: chosenFlower,
+			pictureNumber,
+			type: 'afbeelding',
+		};
 	} else {
 		return tussendoor[Math.floor(Math.random() * tussendoor.length)];
 	}
 }
 
 let flitsFlowers = async function (chosenFlowers) {
-	let chanceTussendoortje = 0.0;
+	let chanceTussendoortje = 0.2;
 	let showFlits = document.getElementById('showFlits');
+	let previous = {};
 	while (flitsende) {
 		if (!paused) {
 			showFlits.innerHTML = '';
 			let newAfbeelding = getFlitsAfbeelding(
 				chanceTussendoortje,
-				chosenFlowers
+				chosenFlowers,
+				previous
 			);
-			showFlits.appendChild(newAfbeelding);
-			await flowerShowTime();
-			let textContainer = create_element('div', ['textContainer']);
-			let text = create_element(
-				'p',
-				[],
-				'',
-				{},
-				newAfbeelding.getAttribute('type')
-			);
-			textContainer.appendChild(text);
-			if (flitsende) {
-				showFlits.appendChild(textContainer);
 
-				await nameShowTime();
+			let textContainer = create_element('div', ['textContainer']);
+			let text = create_element('p', [], '', {}, newAfbeelding.text);
+			textContainer.appendChild(text);
+			showFlits.appendChild(newAfbeelding.element);
+			if (newAfbeelding.type === 'afbeelding') {
+				await flowerShowTime();
+				if (flitsende) {
+					showFlits.appendChild(textContainer);
+				}
+			} else {
+				showFlits.appendChild(textContainer);
+				await flowerShowTime();
 			}
-		} else await nameShowTime();
+			await nameShowTime();
+			previous = newAfbeelding;
+		} else {
+			await nameShowTime();
+		}
 	}
 };
 let startFlitsen = function () {
@@ -151,7 +276,7 @@ let startFlitsen = function () {
 	flitsSectie.innerHTML = '';
 
 	let showFlits = create_element('div', [], 'showFlits');
-
+	let flitsButtons = create_element('div', ['buttons']);
 	let stopBtn = create_element(
 		'button',
 		['stop', 'unclicked'],
@@ -189,8 +314,9 @@ let startFlitsen = function () {
 	};
 
 	flitsSectie.appendChild(showFlits);
-	flitsSectie.appendChild(pauseBtn);
-	flitsSectie.appendChild(stopBtn);
+	flitsSectie.appendChild(flitsButtons);
+	flitsButtons.appendChild(pauseBtn);
+	flitsButtons.appendChild(stopBtn);
 
 	flitsende = true;
 	paused = false;
