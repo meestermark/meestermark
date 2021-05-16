@@ -1,0 +1,108 @@
+html,
+body {
+	height: 100%;
+	color: var(--font-color);
+}
+
+:root {
+	--spacing-1: 8px;
+	--spacing-2: 12px;
+	--spacing-3: 16px;
+	--spacing-4: 24px;
+
+	--border-radius: 12px;
+
+	--font-color: #323232;
+}
+
+body {
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+main {
+	padding: 5rem 1rem 1rem 1rem;
+}
+
+a {
+	color: var(--font-color);
+	text-decoration: none;
+	font-weight: 600;
+}
+
+/*  HEADER  */
+header {
+	position: fixed;
+	width: 100%;
+	max-width: 900px;
+	z-index: 10;
+	height: 5rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: white;
+}
+
+nav ul {
+	display: flex;
+	padding: 0;
+	align-items: center;
+
+	list-style-type: none;
+	margin: 0;
+	margin-left: auto;
+}
+
+nav ul li {
+	margin: var(--spacing-1);
+}
+
+/* main */
+#name {
+	display: none;
+}
+
+#over-mij {
+	display: flex;
+}
+.portrait {
+	width: 300px;
+	border-radius: var(--border-radius);
+	flex-shrink: 0;
+	margin: 0 auto;
+}
+
+summary {
+	list-style-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/right-arrow.svg);
+	cursor: zoom-in;
+}
+
+summary h2 {
+	display: inline;
+}
+
+#vaardigheden-container {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+#vaardigheden-container > * {
+	font-size: 2em;
+	width: 2em;
+	margin-top: var(--spacing-1);
+}
+
+@media only screen and (max-width: 600px) {
+	header h1 {
+		display: none;
+	}
+
+	#name {
+		display: block;
+	}
+	#over-mij {
+		flex-direction: column;
+	}
+}

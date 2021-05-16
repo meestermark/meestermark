@@ -1,26 +1,138 @@
 <!DOCTYPE html>
-
-<html lang="en">
+<html lang="nl">
 	<head>
-		<!-- 
-            de charset gebruikt de computer om tekens op te slaan als een stroom van bytes. 
-            UTF-8 wordt door HTML5 specificaties aanbevolen.
-        -->
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" type="text/css" href="styles.css" />
-		<title></title>
+		<title>Mijn Portfolio</title>
+
+		<link href="style.css" type="text/css" rel="stylesheet" />
+
+		<script
+			src="https://kit.fontawesome.com/3524381fa5.js"
+			crossorigin="anonymous"
+		></script>
 	</head>
 	<body>
 		<header>
-			<h1>Welkom op een onderwijswebsite door Meester Mark</h1>
+			<h1>Marcus Brandes</h1>
+			<nav>
+				<ul>
+					<li><a href="#over-mij">Over mij</a></li>
+					<li><a href="#projecten">Projecten</a></li>
+					<li><a href="#vaardigheden">Vaardigheden</a></li>
+					<li>
+						<a
+							href="https://www.linkedin.com/in/marcus-brandes-59ba1282/?originalSubdomain=nl"
+							>Contact</a
+						>
+					</li>
+				</ul>
+			</nav>
 		</header>
 		<main>
-			<a href="https://meestermark.github.io/bloemenflitsen/"
-				><p>een website om bloemen te flitsen</p></a
-			>
-			<script type="text/javascript" src="main.js"></script>
+			<h1 id="name">Marcus Brandes</h1>
+			<section id="over-mij">
+				<div class="text-container">
+					<h1>Over mij</h1>
+
+					<p>
+						Sinds de lente van 2020 ben ik bezig met het leren programmeren. Op
+						deze website vertel ik wat ik tot nu toe gemaakt heb.
+					</p>
+					<p>
+						Ik werk ook op school als kleutermeester en ik werk in de
+						gehandicaptenzorg op een woongroep voor mensen met een lichte
+						verstandelijke beperking.
+					</p>
+					<p>
+						Naast programmeren hou ik van wandelen, schaken, zingen en fietsen.
+						Ik woon samen met mijn vriendin in Wageningen.
+					</p>
+					<p>
+						Fun fact: Bij de kleuters word ik vaker met juf dan met meester
+						aangesproken ;-P
+					</p>
+				</div>
+				<img
+					src="./resources/Marcus_Hermans_Hohe.jpg"
+					alt="A photo of Ada Lovelace"
+					class="portrait"
+				/>
+			</section>
+			<section id="projecten">
+				<h1>Projecten</h1>
+				<details class="project">
+					<summary>
+						<h2>Responsive website</h2>
+					</summary>
+					<p>
+						Een website gemaakt naar aanleiding van een opdracht van Codecadamy.
+						Het doel was een responsieve website te maken, wat aardig gelukt
+						is.<a href="https://github.com/MarcusBBB/saboteurs"
+							>Meer info in de repository</a
+						>
+					</p>
+					<a href="https://marcusbbb.github.io/saboteurs/">
+						<img
+							src="./resources/projecten/afbeeldingresponsiveclub-klein.png"
+							alt="screenshot van responsive design website"
+							class="project-foto"
+					/></a>
+				</details>
+				<details class="project">
+					<summary>
+						<h2>Node game om je hoed terug te halen</h2>
+					</summary>
+					<p>
+						Een node spelletje gemaakt naar aanleiding van een opdracht van
+						Codecadamy. Ik heb de originele opdracht uitgebreid met puppies die
+						je vindt en je vervolgens helpen met zoeken.
+
+						<a href="https://github.com/MarcusBBB/findMyHat"
+							>Meer info in de repository</a
+						>
+						<a href="https://github.com/MarcusBBB/findMyHat">
+							<img
+								src="./resources/projecten/schermafdrukfindyourhat.png"
+								alt="screenshot van find yor hat spelletje"
+								class="project-foto"
+						/></a>
+					</p>
+				</details>
+				<details class="project">
+					<summary>
+						<h2>Sudoku solver</h2>
+					</summary>
+					<p>
+						Een website om sudoku's op te lossen. En voor mezelf om te oefenen
+						met het gebruiken van JavaScript om een website in te richten. is.<a
+							href="https://github.com/MarcusBBB/sudokusolver"
+							>Meer info in de repository</a
+						>
+					</p>
+					<a href="https://marcusbbb.github.io/sudokusolver/">
+						<img
+							src="./resources/projecten/sudokusolverwebsite.png"
+							alt="screenshot van de sudoku solver website"
+							class="project-foto"
+					/></a>
+				</details>
+			</section>
+			<section id="vaardigheden">
+				<h2>vaardigheden</h2>
+				<div id="vaardigheden-container">
+					<i class="fab fa-python"></i>
+					<i class="fab fa-html5"></i>
+					<i class="fab fa-css3-alt"></i>
+					<i class="fab fa-js"></i>
+					<i class="fab fa-react"></i>
+					<i class="fab fa-git"></i>
+					<i class="fas fa-terminal"></i>
+					<i class="fab fa-node"></i>
+					<i class="fab fa-github"></i>
+				</div>
+			</section>
 		</main>
+		<script src="main.js"></script>
 	</body>
-	<html></html>
 </html>
