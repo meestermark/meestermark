@@ -30,7 +30,6 @@ p {
 /* flitsen part */
 #flitsSectie {
 	width: 75%;
-	height: 100vh;
 }
 #showFlits {
 	width: 100%;
@@ -53,7 +52,7 @@ p {
 	color: black;
 }
 
-#flitsSectie .buttons {
+#flitsSectie .buttonsContainer {
 	position: fixed;
 	right: 100px;
 }
@@ -102,7 +101,7 @@ p {
 	position: fixed;
 	border: 2px solid black;
 	border-radius: 10px;
-	left: 66%;
+	left: 100%;
 	top: 40vh;
 	width: 35%;
 	height: 55vh;

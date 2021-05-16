@@ -155,29 +155,27 @@ toggleVinkje = function (e) {
 		bloemetje.classList.add('chosen');
 	}
 };
+
 showBloemInfo = function (e) {
 	let positioning = ['1/1/6/6', '1/5/6/11', '5/1/11/6', '5/5/11/11'];
-
+	flitsSectie.innerHTML = '';
 	weergaveSectie.innerHTML = '';
 	let grid = create_element('div', ['mainGrid']);
-	for (let i = 1; i < 5; i++) {
+	for (let i = 0; i < 4; i++) {
 		let bloemAfbeelding = create_element('img', [], '', {
-			src: `./resources/photos_big/${e.target.innerText}${i}.jpg`,
+			src: `./resources/photos_big/${e.target.innerText}${i + 1}.jpg`,
 		});
-		bloemAfbeelding.style['grid-area'] = positioning[i - 1];
+		bloemAfbeelding.style['grid-area'] = positioning[i];
 		bloemAfbeelding.onclick = () => {
 			let sibling = bloemAfbeelding.parentNode.firstElementChild;
 			do {
-				if (sibling !== bloemAfbeelding) {
-					sibling.style['z-index'] = '1';
-				}
+				sibling.style['z-index'] = '1';
 			} while ((sibling = sibling.nextElementSibling));
 
 			bloemAfbeelding.style['z-index'] = '2';
 		};
 		grid.appendChild(bloemAfbeelding);
 	}
-
 	weergaveSectie.appendChild(grid);
 };
 let getChosenFlowers = function () {
@@ -189,31 +187,52 @@ let getChosenFlowers = function () {
 	return chosenFlowers;
 };
 
+pullConfig = function () {
+	configPull.value = 'out';
+	configSectie.style.left = '66%';
+};
+pushConfig = function () {
+	configPull.value = 'in';
+	configSectie.style.left = '100%';
+};
+toggleConfig = function () {
+	if (configPull.value === 'in') {
+		pullConfig();
+	} else {
+		pushConfig();
+	}
+};
+
 flowerShowTime = function () {
 	return new Promise((resolve) => {
 		setTimeout(() => {
 			resolve();
-		}, 3000);
+		}, flitsTime - showNameTime);
 	});
 };
 nameShowTime = function () {
 	return new Promise((resolve) => {
 		setTimeout(() => {
 			resolve();
-		}, 1000);
+		}, showNameTime);
 	});
 };
 function getFlitsAfbeelding(chanceTussendoortje, chosenFlowers, previous) {
-	//console.log('previous', previous, chanceTussendoortje);
+	// als de vorige afbeelding een giphy was of het is de eerste afbeelding, dan wordt het sowieso een bloemafbeelding.
 	if (previous.type !== 'afbeelding') {
 		chanceTussendoortje = 0.0;
 	}
+
+	// als showPicture true is dan wordt een bloemafbeelding gekozen, anders een giphy.
 	let showPicture = Math.random() > chanceTussendoortje;
+
 	if (showPicture) {
 		let picture = document.createElement('img');
 		let chosenFlower =
 			chosenFlowers[Math.floor(Math.random() * chosenFlowers.length)];
 		let pictureNumber = Math.floor(Math.random() * 4) + 1;
+
+		// voorkom dat je twee keer dezelfde afbeelding krijgt, zelfs als er maar één bloem geflitst wordt.
 		while (
 			chosenFlower === previous.text &&
 			pictureNumber === previous.pictureNumber
@@ -240,6 +259,9 @@ function getFlitsAfbeelding(chanceTussendoortje, chosenFlowers, previous) {
 
 let flitsFlowers = async function (chosenFlowers) {
 	let chanceTussendoortje = 0.2;
+	flitsende = true;
+	paused = false;
+
 	let showFlits = document.getElementById('showFlits');
 	let previous = {};
 	while (flitsende) {
@@ -255,6 +277,9 @@ let flitsFlowers = async function (chosenFlowers) {
 			let text = create_element('p', [], '', {}, newAfbeelding.text);
 			textContainer.appendChild(text);
 			showFlits.appendChild(newAfbeelding.element);
+
+			// Als er een bloemafbeelding geflitst wordt, komt de naam niet gelijk in beeld zodat ook de lezende kleuters naar de afbeelding kijken.
+			// Is het een giphy dan komt de naam wel gelijk in beeld zodat de leerkracht kan zeggen wat de kleuters erbij kunnen doen.
 			if (newAfbeelding.type === 'afbeelding') {
 				await flowerShowTime();
 				if (flitsende) {
@@ -267,31 +292,13 @@ let flitsFlowers = async function (chosenFlowers) {
 			await nameShowTime();
 			previous = newAfbeelding;
 		} else {
+			// beetje ongelukkig genaamd maar de nameShowTime is 1 seconde, dus als het flitsen gepauseerd is, wacht hij steeds 1 sec.
 			await nameShowTime();
 		}
 	}
 };
-let startFlitsen = function () {
-	weergaveSectie.innerHTML = '';
-	flitsSectie.innerHTML = '';
 
-	let showFlits = create_element('div', [], 'showFlits');
-	let flitsButtons = create_element('div', ['buttons']);
-	let stopBtn = create_element(
-		'button',
-		['stop', 'unclicked'],
-		'',
-		{},
-		'stop.'
-	);
-	stopBtn.onclick = () => {
-		flitsende = false;
-		let pauseBtn = document.getElementsByClassName('pause')[0];
-		pauseBtn.classList.remove('clicked');
-		pauseBtn.innerText = 'pauze';
-
-		flitsSectie.innerHTML = '';
-	};
+getPauseBtn = function () {
 	let pauseBtn = create_element(
 		'button',
 		['pause', 'unclicked'],
@@ -312,23 +319,40 @@ let startFlitsen = function () {
 			e.target.innerText = 'gepauzeerd';
 		}
 	};
-
+	return pauseBtn;
+};
+getStopBtn = function () {
+	let stopBtn = create_element(
+		'button',
+		['stop', 'unclicked'],
+		'',
+		{},
+		'stop.'
+	);
+	stopBtn.onclick = stopFlitsen;
+	return stopBtn;
+};
+createFlitsSectie = function () {
+	weergaveSectie.innerHTML = '';
+	flitsSectie.innerHTML = '';
+	pushConfig();
+	let showFlits = create_element('div', [], 'showFlits');
 	flitsSectie.appendChild(showFlits);
-	flitsSectie.appendChild(flitsButtons);
-	flitsButtons.appendChild(pauseBtn);
-	flitsButtons.appendChild(stopBtn);
 
-	flitsende = true;
-	paused = false;
-
-	configPull.value = 'in';
-	configSectie.style.left = '99%';
-
+	let flitsButtonsContainer = create_element('div', ['buttonsContainer']);
+	flitsButtonsContainer.appendChild(getPauseBtn());
+	flitsButtonsContainer.appendChild(getStopBtn());
+	flitsSectie.appendChild(flitsButtonsContainer);
+};
+let startFlitsen = function () {
+	createFlitsSectie();
 	let chosenFlowers = getChosenFlowers();
 	flitsFlowers(chosenFlowers);
 };
-
+let pauseFlitsen = function () {};
 let stopFlitsen = function () {
 	flitsende = false;
+	flitsSectie.innerHTML = '';
+	pullConfig();
 	console.log('flitsen is gestopt.');
 };

@@ -1,18 +1,9 @@
 //create_element -> type, classNames, id, attributes, innertext, children
 
 // setting up config section
-let configSectie = document.getElementById('config');
-let configPull = document.getElementById('configPull');
-configPull.onclick = function () {
-	if (configPull.value == 'in') {
-		configPull.value = 'out';
-		configSectie.style.left = '66%';
-	} else {
-		configPull.value = 'in';
-		configSectie.style.left = '99%';
-	}
-};
 
+configPull.onclick = toggleConfig;
+body.onload = pullConfig;
 function toggle(elements = [], aspect = [], values = []) {
 	// takes two elements with the aspect that's toggled and two values that they toggle with, both provided in a list.
 	if (elements[0][aspect[0]][aspect[1]] == values[0]) {
@@ -62,7 +53,7 @@ function createBloemElementen(withVinkje = true) {
 		}
 	}
 }
-function createFlitsSectie() {
+function createFlitsConfigSectie() {
 	clearConfigSectie();
 	weergaveSectie.innerHTML = '';
 	configHeader.innerText = 'kies de bloemen waar je mee wilt flitsen.';
@@ -74,14 +65,13 @@ function createFlitsSectie() {
 	flitsSectie.innerHTML = '';
 }
 
-function createInfoSectie() {
+function createInfoConfigSectie() {
 	clearConfigSectie();
 	flitsSectie.innerHTML = '';
 	configHeader.innerText = 'kies de bloemen waar je mee wilt flitsen.';
 	createBloemElementen(false);
-	weergaveSectie.appendChild(tussendoor[0]);
 }
-infoConfigSectie.onclick = createInfoSectie;
-flitsConfigSectie.onclick = createFlitsSectie;
+infoConfigSectie.onclick = createInfoConfigSectie;
+flitsConfigSectie.onclick = createFlitsConfigSectie;
 
 createFlitsSectie();
