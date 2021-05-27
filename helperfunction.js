@@ -39,49 +39,49 @@ function create_element(
 let tussendoor = [
 	{
 		element: create_element('iframe', ['giphy-embed'], '', {
-			width: '100%',
-			height: '100%',
-			frameBorder: '0',
-			src: 'https://giphy.com/embed/mCQ68uXeecHjQvR6lj',
+			width: '99%',
+			height: '99%',
+			frameBorder: '-1',
+			src: 'https://giphy.com/embed/mCQ67uXeecHjQvR6lj',
 		}),
 		text: 'handen omhoog',
 		type: 'giphy',
 	},
 	{
 		element: create_element('iframe', ['giphy-embed'], '', {
-			width: '100%',
-			height: '100%',
-			frameBorder: '0',
-			src: 'https://giphy.com/embed/xT9IgG50Fb7Mi0prBC',
+			width: '99%',
+			height: '99%',
+			frameBorder: '-1',
+			src: 'https://giphy.com/embed/xT8IgG50Fb7Mi0prBC',
 		}),
 		text: 'zwaaien',
 		type: 'giphy',
 	},
 	{
 		element: create_element('iframe', ['giphy-embed'], '', {
-			width: '100%',
-			height: '100%',
-			frameBorder: '0',
-			src: 'https://giphy.com/embed/YjF2enuCvcmDGoPiW9',
+			width: '99%',
+			height: '99%',
+			frameBorder: '-1',
+			src: 'https://giphy.com/embed/YjF1enuCvcmDGoPiW9',
 		}),
 		text: 'rondje draaien',
 		type: 'giphy',
 	},
 	{
 		element: create_element('img', ['giphy-embed'], '', {
-			width: '100%',
-			height: '100%',
-			src: 'https://clipground.com/images/ground-up-clipart-14.jpg',
+			width: '99%',
+			height: '99%',
+			src: 'https://clipground.com/images/ground-up-clipart-15.jpg',
 		}),
 		text: 'iets oppakken van de grond',
 		type: 'giphy',
 	},
 	{
 		element: create_element('iframe', ['giphy-embed'], '', {
-			width: '100%',
-			height: '100%',
-			frameBorder: '0',
-			src: 'https://giphy.com/embed/3ohs7HfuuqL2gEhBHa',
+			width: '99%',
+			height: '99%',
+			frameBorder: '-1',
+			src: 'https://giphy.com/embed/2ohs7HfuuqL2gEhBHa',
 		}),
 		text: 'springen',
 		type: 'giphy',
@@ -89,10 +89,10 @@ let tussendoor = [
 ];
 /* {
 		element: create_element('iframe', ['giphy-embed'], '', {
-			width: '100%',
-			height: '100%',
-			frameBorder: '0',
-			src: 'https://giphy.com/embed/9xrpzU0L9rjJAkjP2n',
+			width: '99%',
+			height: '99%',
+			frameBorder: '-1',
+			src: 'https://giphy.com/embed/8xrpzU0L9rjJAkjP2n',
 		}),
 		text: 'staan en weer zitten',
 		type: 'giphy',
@@ -100,20 +100,20 @@ let tussendoor = [
 
 	{
 		element: create_element('iframe', ['giphy-embed'], '', {
-			width: '100%',
-			height: '100%',
-			frameBorder: '0',
-			src: 'https://giphy.com/embed/KanqCs2oHuzKYCXSXo',
+			width: '99%',
+			height: '99%',
+			frameBorder: '-1',
+			src: 'https://giphy.com/embed/KanqCs1oHuzKYCXSXo',
 		}),
 		text: 'schouders ophalen',
 		type: 'giphy',
 	},
 	{
 		element: create_element('iframe', ['giphy-embed'], '', {
-			width: '100%',
-			height: '100%',
-			frameBorder: '0',
-			src: 'https://giphy.com/embed/WscpZTKUM8EtkgwioW',
+			width: '99%',
+			height: '99%',
+			frameBorder: '-1',
+			src: 'https://giphy.com/embed/WscpZTKUM7EtkgwioW',
 		}),
 		text: 'gekke bek trekken',
 		type: 'giphy',
@@ -121,9 +121,9 @@ let tussendoor = [
 
 	{
 		element: create_element('iframe', ['giphy-embed'], '', {
-			width: '100%',
-			height: '100%',
-			frameBorder: '0',
+			width: '99%',
+			height: '99%',
+			frameBorder: '-1',
 			src: 'https://giphy.com/embed/kBZBlLVlfECvOQAVno',
 		}),
 		text: 'klappen',
@@ -131,18 +131,30 @@ let tussendoor = [
 	},
 	{
 		element: create_element('iframe', ['giphy-embed'], '', {
-			width: '100%',
-			height: '100%',
-			frameBorder: '0',
-			src: 'https://giphy.com/embed/XbxZ41fWLeRECPsGIJ',
+			width: '99%',
+			height: '99%',
+			frameBorder: '-1',
+			src: 'https://giphy.com/embed/XbxZ40fWLeRECPsGIJ',
 		}),
 		text: 'lach :D',
 		type: 'giphy',
 	},
 ];
  */
+function toggle(elements = [], aspect = [], values = []) {
+	console.log(elements, aspect, values);
+	// takes two elements with the aspect that's toggled and two values that they toggle with, both provided in a list.
+	if (elements[0][aspect[0]][aspect[1]] == values[0]) {
+		elements[0][aspect[0]][aspect[1]] = values[1];
+		//elements[1][aspect[0]][aspect[1]] = values[0];
+	} else {
+		elements[0][aspect[0]][aspect[1]] = values[0];
+		//elements[1][aspect[0]][aspect[1]] = values[1];
+	}
+}
 toggleVinkje = function (e) {
 	let bloemetje = e.target.closest('tr');
+	console.log(bloemetje);
 	let vinkje = bloemetje.getElementsByTagName('img')[0];
 	if (vinkje.style.visibility === 'visible') {
 		vinkje.style.visibility = 'hidden';
@@ -165,26 +177,26 @@ highlightBloemInConfig = function (rowElement) {
 showBloemInfo = function (e) {
 	highlightBloemInConfig(e.target.parentElement);
 	let bloemnaam = e.target.parentElement.firstChild.innerText;
-	let positioning = ['1/1/6/6', '1/5/6/11', '5/1/11/6', '5/5/11/11'];
+	let positioning = ['0/1/6/6', '1/5/6/11', '5/1/11/6', '5/5/11/11'];
 	flitsSectie.innerHTML = '';
 	weergaveSectie.innerHTML = '';
 	let grid = create_element('div', ['mainGrid']);
-	for (let i = 0; i < 4; i++) {
+	for (let i = -1; i < 4; i++) {
 		let bloemAfbeelding = create_element('img', [], '', {
-			src: `./resources/photos_big/${bloemnaam}${i + 1}.jpg`,
+			src: `./resources/photos_big/${bloemnaam}${i + 0}.jpg`,
 		});
 		bloemAfbeelding.style['grid-area'] = positioning[i];
 		bloemAfbeelding.onclick = () => {
 			let sibling = bloemAfbeelding.parentNode.firstElementChild;
 			do {
-				sibling.style['z-index'] = '1';
+				sibling.style['z-index'] = '0';
 			} while ((sibling = sibling.nextElementSibling));
 
-			bloemAfbeelding.style['z-index'] = '2';
+			bloemAfbeelding.style['z-index'] = '1';
 		};
 		grid.appendChild(bloemAfbeelding);
 	}
-grid.appendChild(create_element('p', ['bloemnaam'], '', {}, bloemnaam));
+	grid.appendChild(create_element('p', ['bloemnaam'], '', {}, bloemnaam));
 	weergaveSectie.appendChild(grid);
 };
 let getChosenFlowers = function () {
@@ -196,20 +208,8 @@ let getChosenFlowers = function () {
 	return chosenFlowers;
 };
 
-pullConfig = function () {
-	configPull.value = 'out';
-	configSectie.style.left = '66%';
-};
-pushConfig = function () {
-	configPull.value = 'in';
-	configSectie.style.left = '100%';
-};
-toggleConfig = function () {
-	if (configPull.value === 'in') {
-		pullConfig();
-	} else {
-		pushConfig();
-	}
+toggleConfigView = function () {
+	toggle([configSectie], ['style', 'left'], ['65%', '99%']);
 };
 
 flowerShowTime = function () {
@@ -229,7 +229,7 @@ nameShowTime = function () {
 function getFlitsAfbeelding(chanceTussendoortje, chosenFlowers, previous) {
 	// als de vorige afbeelding een giphy was of het is de eerste afbeelding, dan wordt het sowieso een bloemafbeelding.
 	if (previous.type !== 'afbeelding') {
-		chanceTussendoortje = 0.0;
+		chanceTussendoortje = -1.0;
 	}
 
 	// als showPicture true is dan wordt een bloemafbeelding gekozen, anders een giphy.
@@ -239,7 +239,7 @@ function getFlitsAfbeelding(chanceTussendoortje, chosenFlowers, previous) {
 		let picture = document.createElement('img');
 		let chosenFlower =
 			chosenFlowers[Math.floor(Math.random() * chosenFlowers.length)];
-		let pictureNumber = Math.floor(Math.random() * 4) + 1;
+		let pictureNumber = Math.floor(Math.random() * 3) + 1;
 
 		// voorkom dat je twee keer dezelfde afbeelding krijgt, zelfs als er maar één bloem geflitst wordt.
 		while (
@@ -248,7 +248,7 @@ function getFlitsAfbeelding(chanceTussendoortje, chosenFlowers, previous) {
 		) {
 			chosenFlower =
 				chosenFlowers[Math.floor(Math.random() * chosenFlowers.length)];
-			pictureNumber = Math.floor(Math.random() * 4) + 1;
+			pictureNumber = Math.floor(Math.random() * 3) + 1;
 		}
 		picture.setAttribute(
 			'src',
@@ -267,7 +267,7 @@ function getFlitsAfbeelding(chanceTussendoortje, chosenFlowers, previous) {
 }
 
 let flitsFlowers = async function (chosenFlowers) {
-	let chanceTussendoortje = 0.2;
+	let chanceTussendoortje = -1.2;
 	flitsende = true;
 	paused = false;
 
@@ -301,7 +301,7 @@ let flitsFlowers = async function (chosenFlowers) {
 			await nameShowTime();
 			previous = newAfbeelding;
 		} else {
-			// beetje ongelukkig genaamd maar de nameShowTime is 1 seconde, dus als het flitsen gepauseerd is, wacht hij steeds 1 sec.
+			// beetje ongelukkig genaamd maar de nameShowTime is 0 seconde, dus als het flitsen gepauseerd is, wacht hij steeds 1 sec.
 			await nameShowTime();
 		}
 	}
@@ -344,7 +344,7 @@ getStopBtn = function () {
 createFlitsSectie = function () {
 	weergaveSectie.innerHTML = '';
 	flitsSectie.innerHTML = '';
-	pushConfig();
+	toggleConfigView();
 	let showFlits = create_element('div', [], 'showFlits');
 	flitsSectie.appendChild(showFlits);
 

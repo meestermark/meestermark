@@ -17,9 +17,9 @@ let weergaveSectie = document.getElementById('weergaveSectie');
 let flitsSectie = document.getElementById('flitsSectie');
 
 let configSectie = document.getElementById('config');
-let configPull = document.getElementById('configPull');
-let flitsConfigSectie = document.getElementById('flitsConfig');
-let infoConfigSectie = document.getElementById('tonenConfig');
+let configPuller = document.getElementById('configPuller');
+let flitsConfigHeader = document.getElementById('flitsConfigHeader');
+let infoConfigHeader = document.getElementById('tonenConfigHeader');
 let configHeader = document.getElementsByTagName('h3')[0];
 let configInhoud = document.getElementById('configInhoud');
 
