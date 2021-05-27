@@ -21,7 +21,9 @@ function createBloemElementen(withVinkje = true) {
 
 	let tableBody = create_element('tbody', [], 'configTableBody');
 	for (let bloem of bloemen) {
-		let newRow = create_element('tr', [bloem.naam, 'bloemRow']);
+		let newRow = create_element('tr', ['bloemRow'], '', {
+			naam: bloem.naam,
+		});
 		let nameData = create_element('td', ['bloemnaamContainer']);
 
 		let bloemelement = create_element('p', [], '', {}, bloem.naam);
@@ -99,4 +101,4 @@ function createInfoConfigSectie() {
 infoConfigHeader.onclick = createInfoConfigSectie;
 flitsConfigHeader.onclick = createFlitsConfigSectie;
 
-createFlitsSectie();
+//createFlitsSectie();

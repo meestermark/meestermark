@@ -55,6 +55,7 @@ p {
 #flitsSectie .buttonsContainer {
 	position: fixed;
 	right: 100px;
+	display: flex;
 }
 
 #flitsSectie button {
@@ -91,8 +92,7 @@ p {
 }
 .mainGrid img {
 	max-width: 100%;
-	height: auto;
-	max-height: 50vh;
+	/*height: auto; */
 	z-index: 1;
 }
 
