@@ -52,6 +52,10 @@ p {
 	color: black;
 }
 
+#flitsShowTime {
+	direction: rtl;
+}
+
 #flitsSectie .buttonsContainer {
 	position: fixed;
 	right: 100px;

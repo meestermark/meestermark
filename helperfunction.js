@@ -39,14 +39,14 @@ function create_element(
 let tussendoor = [
 	{
 		element: create_element(
-			'iframe',
+			'img',
 			['giphy-embed'],
 			'',
 			{
 				width: '99%',
 				height: '99%',
 				frameBorder: '0',
-				src: 'https://giphy.com/embed/3o7aD2Um7U7b3VG0bS',
+				src: './resources/armen omhoog.gif',
 			},
 			'handen omhoog'
 		),
@@ -55,14 +55,14 @@ let tussendoor = [
 	},
 	{
 		element: create_element(
-			'iframe',
+			'img',
 			['giphy-embed'],
 			'',
 			{
 				width: '99%',
 				height: '99%',
 				frameBorder: '0',
-				src: 'https://giphy.com/embed/xT9IgG50Fb7Mi0prBC',
+				src: './resources/zwaaien.gif',
 			},
 			'zwaaien'
 		),
@@ -71,14 +71,14 @@ let tussendoor = [
 	},
 	{
 		element: create_element(
-			'iframe',
+			'img',
 			['giphy-embed'],
 			'',
 			{
 				width: '99%',
 				height: '99%',
 				frameBorder: '0',
-				src: 'https://giphy.com/embed/YjF2enuCvcmDGoPiW9',
+				src: './resources/rondje draaien.gif',
 			},
 			'rondje draaien'
 		),
@@ -93,7 +93,7 @@ let tussendoor = [
 			{
 				width: '99%',
 				height: '99%',
-				src: '/bloemenflitsen/resources/pickupfromtheground.png',
+				src: '/resources/pickupfromtheground.png',
 			},
 			'bloemetje plukken'
 		),
@@ -102,75 +102,74 @@ let tussendoor = [
 	},
 	{
 		element: create_element(
-			'iframe',
+			'img',
 			['giphy-embed'],
 			'',
 			{
 				width: '99%',
 				height: '99%',
-				frameBorder: '-1',
-				src: 'https://giphy.com/embed/3ohs7HfuuqL2gEhBHa',
+				frameBorder: '0',
+				src: './resources/spring.gif',
 			},
 			'springen'
 		),
 		text: 'springen',
 		type: 'giphy',
 	},
-];
-/* {
-		element: create_element('iframe', ['giphy-embed'], '', {
+	{
+		element: create_element('img', ['giphy-embed'], '', {
 			width: '99%',
 			height: '99%',
-			frameBorder: '-1',
-			src: 'https://giphy.com/embed/8xrpzU0L9rjJAkjP2n',
+			frameBorder: '0',
+			src: './resources/opstaan.gif',
 		}),
 		text: 'staan en weer zitten',
 		type: 'giphy',
 	},
 
 	{
-		element: create_element('iframe', ['giphy-embed'], '', {
+		element: create_element('img', ['giphy-embed'], '', {
 			width: '99%',
 			height: '99%',
-			frameBorder: '-1',
-			src: 'https://giphy.com/embed/KanqCs1oHuzKYCXSXo',
+			frameBorder: '0',
+			src: './resources/schouders optrekken.gif',
 		}),
 		text: 'schouders ophalen',
 		type: 'giphy',
 	},
 	{
-		element: create_element('iframe', ['giphy-embed'], '', {
+		element: create_element('img', ['giphy-embed'], '', {
 			width: '99%',
 			height: '99%',
-			frameBorder: '-1',
-			src: 'https://giphy.com/embed/WscpZTKUM7EtkgwioW',
+			frameBorder: '0',
+			src: './resources/gekkebektrekken.gif',
 		}),
 		text: 'gekke bek trekken',
 		type: 'giphy',
 	},
 
 	{
-		element: create_element('iframe', ['giphy-embed'], '', {
+		element: create_element('img', ['giphy-embed'], '', {
 			width: '99%',
 			height: '99%',
-			frameBorder: '-1',
-			src: 'https://giphy.com/embed/kBZBlLVlfECvOQAVno',
+			frameBorder: '0',
+			src: './resources/klappen.gif',
 		}),
 		text: 'klappen',
 		type: 'giphy',
 	},
 	{
-		element: create_element('iframe', ['giphy-embed'], '', {
+		element: create_element('img', ['giphy-embed'], '', {
 			width: '99%',
 			height: '99%',
-			frameBorder: '-1',
-			src: 'https://giphy.com/embed/XbxZ40fWLeRECPsGIJ',
+			frameBorder: '0',
+			src: './resources/glimlach.gif',
 		}),
-		text: 'lach :D',
+		text: 'glimlach :D',
 		type: 'giphy',
 	},
 ];
- */
+
 function toggle(elements = [], aspect = [], values = []) {
 	console.log(elements, aspect, values);
 	// takes two elements with the aspect that's toggled and two values that they toggle with, both provided in a list.
@@ -326,6 +325,7 @@ let flitsFlowers = async function (chosenFlowers) {
 			} else {
 				showFlits.appendChild(textContainer);
 				await flowerShowTime();
+				await nameShowTime();
 			}
 			await nameShowTime();
 			previous = newAfbeelding;
@@ -338,7 +338,7 @@ let flitsFlowers = async function (chosenFlowers) {
 getChanceTussendoortjeSlider = function () {
 	let sliderDiv = create_element('div', ['TussendoortjeSliderContainer']);
 	sliderDiv.appendChild(
-		create_element('p', [], '', {}, 'kans op een tussendoortje')
+		create_element('p', [], '', {}, 'hoeveel tussendoortjes')
 	);
 	sliderDiv.appendChild(
 		create_element('input', [], 'chanceTussendoortje', {
