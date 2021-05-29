@@ -93,7 +93,7 @@ let tussendoor = [
 			{
 				width: '99%',
 				height: '99%',
-				src: '/resources/pickupfromtheground.png',
+				src: './resources/pickupfromtheground.png',
 			},
 			'bloemetje plukken'
 		),
