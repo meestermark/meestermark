@@ -26,7 +26,7 @@ function createBloemElementen(withVinkje = true) {
 		});
 		let nameData = create_element('td', ['bloemnaamContainer']);
 
-		let bloemelement = create_element('p', [], '', {}, bloem.naam);
+		let bloemP = create_element('p', [], '', {}, bloem.naam);
 		if (withVinkje) {
 			let vinkje = create_element('img', [], '', {
 				src: './resources/vinkje.jpeg',
@@ -36,9 +36,11 @@ function createBloemElementen(withVinkje = true) {
 		} else {
 			newRow.onclick = showBloemInfo;
 		}
-		nameData.appendChild(bloemelement);
+		nameData.appendChild(bloemP);
 		newRow.appendChild(nameData);
-		let bloeitijdData = create_element('td', [], '', {}, bloem.bloeitijd);
+		let bloeitijdData = create_element('td', ['bloeitijdContainer']);
+		let bloeitijdP = create_element('p', [], '', {}, bloem.bloeitijd);
+		bloeitijdData.appendChild(bloeitijdP);
 		newRow.append(bloeitijdData);
 		tableBody.append(newRow);
 	}
